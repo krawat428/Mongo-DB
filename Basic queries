@@ -1,0 +1,41 @@
+//basic queries
+
+
+use example
+db.createCollection('student') 
+
+
+db.student.insert({
+	name:'joe',
+	undergrad:true,
+	units:9,
+	class:['geography','math','physics']	
+})
+
+db.student.insert({
+	name:'jane',
+	undergrad:false,
+	units:12,
+	class:['geography','math','physics',history']	
+})
+
+db.student.insert({
+	name:'kevin',
+	undergrad:true,
+	units:3,
+	class:['geography']	
+})
+
+//queries
+
+db.student.find({'name':'kevin'})
+db.student.find({units:{$gt:6}})
+
+db.student.find({units:{$lt:6}})
+db.student.find({classes:{$in: ['history']}})
+
+db.student.find({classes:{$in:['history']}}).sort({units:1}) // ascending
+db.student.find({classes:{$in:['history']}}).sort({units:-1}) // descending
+db.student.find({}).sort({name: 1}) // ascending alphabatically
+
+db.student.find({}).sort({name: 1}).limit(2)// only 2 results
